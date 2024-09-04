@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Roboto:wght@400&display=swap');
+
+.leave-request-container {
+    font-family: Arial, sans-serif;
+    max-width: 700px;
+    margin: 5px auto;
+    padding:10px;
+    background-color: #def5e9;
+    border-radius: 10px;
+    border: 1px solid #131111;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .leave-request-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #152d38;
+    padding: 5px;
+    color: rgb(178, 189, 116);
+    border-radius: 10px 10px 0 0;
+    width: 100%;
+    margin-bottom: 15px;
+    font-family: 'Roboto', sans-serif; /* Use a custom font like Roboto */
+  }
+  
+  .header-title {
+    font-size: 26px;
+    margin: 0;
+    font-weight: 700;
+    font-family: 'Lora', serif; /* Change the font style for the header title */
+  }
+  
+  .company-logo {
+    width: 90px;
+    height: 70px;
+  }
+  
+  .leave-request-form .row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom:8px;
+  }
+  
+  .input-field {
+    flex: 1;
+    margin-right:15px;
+  }
+  
+  .input-field label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .input-field input,
+  .input-field select,
+  .input-field textarea {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+  }
+  
+  .checkbox-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-right: 25px;
+  }
+  
+  .checkbox-group label {
+    margin-bottom: 8px;
+    font-weight: normal;
+    color: #555;
+  }
+  
+  .certification-note {
+    background-color: #fffacd;
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    border: 1px solid #e6c34a;
+  }
+  
+  .submit-btn {
+    text-align: center;
+  }
+  
+  .submit-btn button {
+    padding: 12px 25px;
+    background-color: #c79a46;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-btn button:hover {
+    background-color: #cecb44;
+  }
+  
+  .leave-request-footer {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 15px;
+    color: #1f1515;
+  }
+  .type{
+    color: rgb(65, 61, 61);
+    font-weight: bold;
+
+  }

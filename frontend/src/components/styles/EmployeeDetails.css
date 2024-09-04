@@ -1,0 +1,47 @@
+.employee-details-container {
+    background-color: white;
+    border: 1px solid black;
+    padding: 20px;
+    width: 450px;
+    margin: auto;
+    border-radius: 5px;
+}
+
+.form-group {
+    margin-bottom:2px;
+    margin-left: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 2px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.form-group input,
+.form-group select {
+    width:80%;
+    padding:5px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: 23px;
+}
+
+.submit-button {
+    background-color: green;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.submit-button:hover {
+    background-color: darkgreen;
+}
+h4{
+    text-align: center;
+}

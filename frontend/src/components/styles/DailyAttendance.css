@@ -1,0 +1,108 @@
+.attendance-container {
+    border: 2px solid #2c3e50;
+    padding: 30px;
+    background-color: #f9f9f9;
+    width: 80%;
+    max-width: 900px;
+    margin: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.attendance-heading {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #34495e;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+.attendance-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.employee-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 25px;
+    border: 3px solid #2c3e50;
+}
+
+.attendance-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.attendance-form label {
+    font-size: 1.2rem;
+    color: #34495e;
+    margin-bottom: 10px;
+}
+
+.attendance-form select {
+    width: 80%;
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+.attendance-buttons {
+    margin-top: 15px;
+    display: flex;
+    gap: 20px;
+}
+
+/* Login button styling */
+.login-button {
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    color: #fff;
+    background-color: #1c8649;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-button {
+    background-color: #1c8649;
+}
+
+.login-button:hover {
+    background-color: #2ecc71; /* Lighter green */
+}
+
+.logout-button {
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    color: #fff;
+    background-color: #c0392b; /* Red color */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button {
+    background-color: #c0392b !important; /* Red color */
+}
+
+.logout-button:hover {
+    background-color: #e74c3c !important; /* Lighter red */
+}
+
+.time-display {
+    margin-top: 25px;
+    font-size: 1.4rem;
+    color: #2c3e50;
+    text-align: center;
+    font-weight: 500;
+}
