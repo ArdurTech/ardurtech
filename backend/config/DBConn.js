@@ -76,7 +76,7 @@ const DBConn = async () => {
         work_mode ENUM('Work from Home', 'Work from Office', 'Work from Client Location') NOT NULL,
         login_time DATETIME NOT NULL,
         logout_time DATETIME,
-        machine_ip VARCHAR(45),
+        ipAdress VARCHAR(45),
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
       )

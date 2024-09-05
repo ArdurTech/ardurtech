@@ -8,7 +8,7 @@ const leaveRequestRoutes = require('./routes/leaveRequestRoutes');
 // Import timesheet routes
 
 require("dotenv").config();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 const cors = require("cors");
 app.use(cors());
@@ -36,12 +36,12 @@ let pool; // Initialize the database connection pool
     // Use the employee routes with the /api prefix
     app.use("/api", EmployeeRoutes);
     app.use("/api", TimesheetRoutes);
-    app.use("/api",AttendanceRoutes);
+    app.use("/api/attendance", AttendanceRoutes);
     app.use('/api/leave-request', leaveRequestRoutes);
 
     // Start the server on the specified port
-    app.listen(3000, () => {
-      console.log(`Server running on http://localhost:${3000}`);
+    app.listen(5000, () => {
+      console.log(`Server running on http://localhost:${5000}`);
     });
   } catch (error) {
     console.error("Error initializing server:", error);

@@ -84,7 +84,7 @@
     padding: 12px 30px;
     font-size: 1.1rem;
     color: #fff;
-    background-color: #c0392b; /* Red color */
+    /* background-color: #c0392b; Red color */
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -92,7 +92,8 @@
 }
 
 .logout-button {
-    background-color: #c0392b !important; /* Red color */
+    background-color: #c0392b !important; 
+    /* Red color */
 }
 
 .logout-button:hover {

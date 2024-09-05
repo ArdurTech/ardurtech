@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useHistory } from "react-router-dom";
 import '../styles/DailyAttendance.css';
 
 const DailyAttendance = () => {
@@ -11,6 +12,12 @@ const DailyAttendance = () => {
     const [startTime, setStartTime] = useState(null);
     const [timer, setTimer] = useState(0);
     const [ipAddress, setIpAddress] = useState('');
+
+    // Format date to MySQL DATETIME format
+    const formatDate = (date) => {
+        const d = new Date(date);
+        return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}:${String(d.getSeconds()).padStart(2, '0')}`;
+    };
 
     useEffect(() => {
         const fetchIpAddress = async () => {
@@ -36,9 +43,9 @@ const DailyAttendance = () => {
     }, [startTime, timer]);
 
     const handleLogin = () => {
-        const currentTime = new Date().toLocaleString();
+        const currentTime = formatDate(new Date());
         setLoginTime(currentTime);
-        axios.post('http://localhost:3000/api/attendance/login', {
+        axios.post('http://localhost:3000/api/attendance', {
             employeeId,
             workMode,
             loginTime: currentTime,
@@ -58,12 +65,10 @@ const DailyAttendance = () => {
     };
 
     const handleLogout = () => {
-        const currentTime = new Date().toLocaleString();
+        const currentTime = new Date().toISOString(); // Use ISO format
         setLogoutTime(currentTime);
         axios.post('http://localhost:3000/api/attendance/logout', {
-            employeeId,
-            logoutTime: currentTime,
-            ipAddress
+            logoutTime: currentTime
         })
         .then(response => {
             console.log(response.data);
@@ -72,6 +77,8 @@ const DailyAttendance = () => {
             console.error('Error logging out:', error);
         });
     };
+    
+    
 
     return (
         <div className="attendance-container">

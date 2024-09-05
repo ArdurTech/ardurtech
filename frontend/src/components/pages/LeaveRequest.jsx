@@ -77,6 +77,7 @@ const LeaveRequest = () => {
               <option value="IT">IT</option>
               <option value="Sales">Sales</option>
               <option value="Marketing">Marketing</option>
+              <option value="Marketing">Operations</option>
             </select>
           </div>
           <div className="input-field">

@@ -1,5 +1,3 @@
-
-
 // Handle POST request for Leave Request
 const LeaveRequestController = async (req, res) => {
   const {
@@ -40,5 +38,5 @@ if
 };
 
 module.exports = {
-  LeaveRequestController
+  LeaveRequestController,
 };

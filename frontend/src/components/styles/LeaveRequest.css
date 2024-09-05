@@ -58,6 +58,7 @@
   .input-field select,
   .input-field textarea {
     width: 95%;
+    height:40px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;

@@ -1,48 +1,38 @@
 const handleLogin = (req, res) => {
     const { employeeId, workMode, loginTime, ipAddress } = req.body;
 
-    if (!employeeId || !workMode || !loginTime || !ipAddress) {
+    if (!employeeId || !workMode || !loginTime) {
         return res.status(400).json({ message: 'Missing required fields' });
     }
 
-    // Check if the employee ID exists in the users table
-    const checkEmployeeQuery = 'SELECT id FROM users WHERE employee_id = ?';
-    req.pool.query(checkEmployeeQuery, [employeeId], (checkError, checkResults) => {
-        if (checkError) {
-            console.error('Database error:', checkError);
+    const insertQuery = 'INSERT INTO attendance (employee_id, work_mode, login_time, ip_address) VALUES (?, ?, ?, ?)';
+    req.pool.query(insertQuery, [employeeId, workMode, loginTime, ipAddress], (error, results) => {
+        if (error) {
+            console.error('Database error:', error);
             return res.status(500).json({ message: 'Database error' });
         }
-
-        if (checkResults.length === 0) {
-            return res.status(404).json({ success: false, message: 'Employee ID not found' });
-        }
-
-        // Insert login record
-        const insertQuery = 'INSERT INTO attendance (employee_id, work_mode, login_time, ip_address) VALUES (?, ?, ?, ?)';
-        req.pool.query(insertQuery, [employeeId, workMode, loginTime, ipAddress], (insertError, insertResults) => {
-            if (insertError) {
-                console.error('Database error:', insertError);
-                return res.status(500).json({ message: 'Database error' });
-            }
-            res.status(200).json({ success: true, message: 'Logged in successfully' });
-        });
+        res.status(200).json({ success: true, message: 'Logged in successfully' });
     });
 };
 
-const handleLogout = (req, res) => {
-    const { employeeId, logoutTime, ipAddress } = req.body;
+const handleLogout = async (req, res) => {
+    const { logoutTime } = req.body;
 
-    if (!employeeId || !logoutTime || !ipAddress) {
-        return res.status(400).json({ message: 'Missing required fields' });
+    if (!logoutTime) {
+        return res.status(400).json({ message: 'Logout time is required' });
     }
 
-    // Find the latest login record for the employee
-    const selectQuery = 'SELECT id FROM attendance WHERE employee_id = ? AND logout_time IS NULL ORDER BY login_time DESC LIMIT 1';
-    req.pool.query(selectQuery, [employeeId], (selectError, selectResults) => {
-        if (selectError) {
-            console.error('Database error:', selectError);
-            return res.status(500).json({ message: 'Database error' });
-        }
+    try {
+        // Convert logoutTime to MySQL-compatible format
+        const logoutTimeFormatted = new Date(logoutTime).toISOString().slice(0, 19).replace('T', ' ');
+
+        // Find the most recent login record without a logout time
+        const [selectResults] = await req.pool.query(`
+            SELECT id FROM attendance
+            WHERE logout_time IS NULL
+            ORDER BY login_time DESC
+            LIMIT 1
+        `);
 
         if (selectResults.length === 0) {
             return res.status(404).json({ message: 'No login record found' });
@@ -51,16 +41,20 @@ const handleLogout = (req, res) => {
         const attendanceId = selectResults[0].id;
 
         // Update the logout time for the found record
-        const updateQuery = 'UPDATE attendance SET logout_time = ? WHERE id = ?';
-        req.pool.query(updateQuery, [logoutTime, attendanceId], (updateError, updateResults) => {
-            if (updateError) {
-                console.error('Database error:', updateError);
-                return res.status(500).json({ message: 'Database error' });
-            }
-            res.status(200).json({ message: 'Logged out successfully' });
-        });
-    });
+        await req.pool.query(`
+            UPDATE attendance 
+            SET logout_time = ? 
+            WHERE id = ?
+        `, [logoutTimeFormatted, attendanceId]);
+
+        res.status(200).json({ message: 'Logged out successfully' });
+    } catch (error) {
+        console.error('Error handling logout:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
 };
+
+
 
 module.exports = {
     handleLogin,
