@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
@@ -25,20 +25,33 @@ jobs:
         run: |
           docker build -t bharti153/frontend:latest ./frontend
           docker build -t bharti153/backend:latest ./backend
-      
+
       - name: Push Docker images to Docker Hub
         run: |
           docker push bharti153/frontend:latest
           docker push bharti153/backend:latest
-      
+
+      - name: Install AWS CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y awscli
+
       - name: Deploy to AWS Elastic Beanstalk
-        uses: aws-actions/elastic-beanstalk-deploy-action@v1
-        with:
-          application-name: ardurtech
-          environment-name: Ardurtech-env
-          version-label: ${{ github.sha }}
-          region: ap-south-1
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+          AWS_REGION: ap-south-1
+          APPLICATION_NAME: ardurtech
+          ENVIRONMENT_NAME: Ardurtech-env
+          VERSION_LABEL: ${{ github.sha }}
+        run: |
+          # Configure AWS CLI
+          aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+          aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+          aws configure set region $AWS_REGION
+
+          # Create a new application version
+          aws elasticbeanstalk create-application-version --application-name $APPLICATION_NAME --version-label $VERSION_LABEL --source-bundle S3Bucket="ardur",S3Key="bundle.zip"
+
+          # Update the environment to use the new version
+          aws elasticbeanstalk update-environment --environment-name $ENVIRONMENT_NAME --version-label $VERSION_LABEL
