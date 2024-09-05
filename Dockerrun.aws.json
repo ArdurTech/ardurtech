@@ -1,0 +1,84 @@
+{
+    "AWSEBDockerrunVersion": "3",
+    "containerDefinitions": [
+      {
+        "name": "backend",
+        "image": "bharti153/backend:latest",
+        "essential": true,
+        "memory": 512,
+        "portMappings": [
+          {
+            "containerPort": 5000,
+            "hostPort": 5000
+          }
+        ],
+        "environment": [
+          {
+            "name": "PORT",
+            "value": "5000"
+          },
+          {
+            "name": "DB_HOST",
+            "value": "database-1.czew08qiqixz.ap-south-1.rds.amazonaws.com"
+          },
+          {
+            "name": "DB_USER",
+            "value": "admin"
+          },
+          {
+            "name": "DB_PASSWORD",
+            "value": "Ardur311012"
+          },
+          {
+            "name": "DB_DATABASE",
+            "value": "ocr_database"
+          },
+          {
+            "name": "DB_TABLENAME",
+            "value": "users"
+          },
+          {
+            "name": "DB_EMPLOYEE_DETAILS_TABLENAME",
+            "value": "employee_details"
+          },
+          {
+            "name": "DB_TIMESHEET_TABLENAME",
+            "value": "timesheet"
+          },
+          {
+            "name": "DB_ATTENDANCE_TABLENAME",
+            "value": "attendance"
+          },
+          {
+            "name": "DB_LEAVE_REQUESTS_TABLENAME",
+            "value": "leave_requests"
+          },
+          {
+            "name": "JWT_SECRET",
+            "value": "3a8da80f20f9bc6c1525466131e168ef4eecdf33237285632bce79350731aee45d4719ec38c46d22cdb57d39bec5081909cb85a84b01d4f567b1388e94f0a6c5"
+          },
+          {
+            "name": "EMAIL_USER",
+            "value": "adiraj3110@gmail.com"
+          },
+          {
+            "name": "EMAIL_PASS",
+            "value": "xooc krei pkkf iozx"
+          }
+        ]
+      },
+      {
+        "name": "frontend",
+        "image": "bharti153/frontend:latest",
+        "essential": true,
+        "memory": 512,
+        "portMappings": [
+          {
+            "containerPort": 3000,
+            "hostPort": 3000
+          }
+        ]
+      }
+    ]
+  }
+  

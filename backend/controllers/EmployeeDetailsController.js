@@ -22,6 +22,7 @@ const EmployeeDetailsController = async (req, res) => {
     !age ||
     !education
   ) {
+    console.log("Validation failed:", { fullName, email, gender, aadhaarNo, panCardNo, localAddress, permanentAddress, age, education });
     return res.status(400).json({ message: "All fields are required" });
   }
 

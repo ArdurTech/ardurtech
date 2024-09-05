@@ -4,12 +4,13 @@ const { sendEmail } = require("../utils/email"); // utility for sending emails
 const crypto = require("crypto"); // for generating unique employee IDs
 
 // Helper function to generate unique employee ID
-const generateEmployeeId = () => {
+const generateEmployeeId = () => {  
   return crypto.randomBytes(6).toString('hex').toUpperCase();
 };
 
 // SignUpController: Handles user registration
 const SignUpController = async (req, res) => {
+  console.log('SignUpController data:', req.body);
   const { username, email, password } = req.body;
 
   // Validate inputs
